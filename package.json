@@ -1,0 +1,21 @@
+{
+  "name": "eh-guid",
+  "version": "0.1.0",
+  "description": "EverHelper working with guid",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calibr/eh-guid"
+  },
+  "author": "calibr <awcalibr@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "just.randomstring": "^0.1.1"
+  },
+  "devDependencies": {
+    "should": "^6.0.1"
+  }
+}
