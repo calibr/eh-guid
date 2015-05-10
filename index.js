@@ -134,5 +134,6 @@ GlobalId.prototype.gen = function() {
 GlobalId.isolate = isolate;
 GlobalId.genIsolated = genIsolated;
 GlobalId.unIsolate = unIsolate;
+GlobalId.gen = gen;
 
 module.exports = GlobalId;

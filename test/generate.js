@@ -13,4 +13,8 @@ describe("Generate guids", function() {
     var guid = g.gen();
     guid.should.match(/^[a-z0-9]{16}$/i);
   });
+  it("generate not isolated guid #2", function() {
+    var guid = GlobalId.gen();
+    guid.should.match(/^[a-z0-9]{16}$/i);
+  });
 });
