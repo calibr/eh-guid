@@ -25,12 +25,16 @@ function isolate(userId, globalId) {
   return userId + "-" + globalId;
 }
 
-function isolateArrayOfObjects(userId, keys, data) {
+function isolateArray(userId, keys, data) {
   for(var i = 0; i != data.length; i++) {
     if(typeof data[i] === "object") {
       isolateObject(userId, keys, data[i]);
     }
+    else {
+      data[i] = isolate(userId, data[i]);
+    }
   }
+  return data;
 }
 
 function isolateObject(userId, keys, object) {
@@ -40,13 +44,14 @@ function isolateObject(userId, keys, object) {
     }
     else {
       if(object[key] instanceof Array) {
-        isolateArrayOfObjects(userId, keys, object[key]);
+        isolateArray(userId, keys, object[key]);
       }
       else if(typeof object[key] == "object") {
         isolateObject(userId, keys, object[key]);
       }
     }
-  }  
+  }
+  return object;
 }
 
 function unIsolateArrayOfObjects(keys, data) {
@@ -70,7 +75,7 @@ function unIsolateObject(keys, object) {
         unIsolateObject(keys, object[key]);
       }
     }
-  }  
+  }
 }
 
 function GlobalId(options) {
@@ -100,10 +105,10 @@ GlobalId.prototype.isolate = function(userId, data) {
     throw new Error("userId is required");
   }
   if(data instanceof Array) {
-    isolateArrayOfObjects(userId, this._options.keys, data);
+    return isolateArray(userId, this._options.keys, data);
   }
   else if(typeof data === "object") {
-    isolateObject(userId, this._options.keys, data);
+    return isolateObject(userId, this._options.keys, data);
   }
   else {
     return isolate(userId, data);

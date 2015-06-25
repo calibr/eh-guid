@@ -36,6 +36,44 @@ describe("isolate", function() {
     should.deepEqual(arr, expected);
   });
 
+  it("should isolate array of mixed data, objects and strings", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var arr = [
+      {
+        title: "title#1",
+        globalId: "guid1",
+        parentId: "parent1"
+      },
+      "string",
+      "string2",
+      {
+        title: "title#2",
+        globalId: "guid2",
+        parentId: "parent2"
+      }
+    ];
+    var expected = [
+      {
+        title: "title#1",
+        globalId: "1-guid1",
+        parentId: "1-parent1"
+      },
+      "1-string",
+      "1-string2",
+      {
+        title: "title#2",
+        globalId: "1-guid2",
+        parentId: "1-parent2"
+      }
+    ];
+    g.isolate(arr);
+    should.deepEqual(arr, expected);
+  });
+
+
   it("isolate array of objects with nested arrays/objects", function() {
     var g = new GlobalId({
       userId: 1,
