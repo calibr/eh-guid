@@ -62,10 +62,22 @@ function unIsolateArrayOfObjects(keys, data) {
   }
 }
 
+function unIsolateArrayOfStrings(data) {
+  for(var i = 0; i != data.length; i++) {
+    if(typeof data[i] === "string") {
+      data[i] = unIsolate(data[i]);
+    }
+  }
+}
+
+
 function unIsolateObject(keys, object) {
   for(var key in object) {
     if(key in keys && typeof object[key] === "string") {
       object[key] = unIsolate(object[key]);
+    }
+    else if(key in keys && (object[key] instanceof Array)) {
+      unIsolateArrayOfStrings(object[key]);
     }
     else {
       if(object[key] instanceof Array) {

@@ -90,4 +90,19 @@ describe("unisolate", function() {
     g.unIsolate(arr);
     should.deepEqual(arr, expected);
   });
+
+  it("unisolate object which have field of array of strings", function() {
+    var obj = {
+      globalId: ["1-test", "1-guid"]
+    };
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId"]
+    });
+    g.unIsolate(obj);
+    var expected = {
+      globalId: ['test', 'guid']
+    };
+    obj.should.eql(expected);
+  });
 });
