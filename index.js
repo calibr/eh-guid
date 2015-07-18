@@ -90,6 +90,19 @@ function unIsolateObject(keys, object) {
   }
 }
 
+/**
+ * get user id from isolated global id
+ * @param  {String} globalId - isolated global id
+ * @return {Number} - returns user id or null if can't extract it
+ */
+function getUser(globalId) {
+  var userId = globalId.split("-")[0];
+  if(isNaN(userId)) {
+    return null;
+  }
+  return parseInt(userId);
+}
+
 function GlobalId(options) {
   if(typeof options === "number") {
     options = {
@@ -152,5 +165,6 @@ GlobalId.isolate = isolate;
 GlobalId.genIsolated = genIsolated;
 GlobalId.unIsolate = unIsolate;
 GlobalId.gen = gen;
+GlobalId.getUser = getUser;
 
 module.exports = GlobalId;
