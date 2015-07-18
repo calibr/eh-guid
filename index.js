@@ -103,6 +103,15 @@ function getUser(globalId) {
   return parseInt(userId);
 }
 
+/**
+ * checks that guid is isolated
+ * @param  {String} globalId
+ * @return {Boolean}
+ */
+function isIsolated(globalId) {
+  return globalId.split("-").length === 2;
+}
+
 function GlobalId(options) {
   if(typeof options === "number") {
     options = {
@@ -166,5 +175,6 @@ GlobalId.genIsolated = genIsolated;
 GlobalId.unIsolate = unIsolate;
 GlobalId.gen = gen;
 GlobalId.getUser = getUser;
+GlobalId.isIsolated = isIsolated;
 
 module.exports = GlobalId;
