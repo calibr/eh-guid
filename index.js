@@ -1,7 +1,8 @@
 "use strict";
 
 var
-  randomString = require("just.randomstring");
+  randomString = require("just.randomstring"),
+  Isolator = require("./lib/isolator");
 
 function gen() {
   return randomString(16);
@@ -19,39 +20,6 @@ function unIsolate(globalId) {
     return globalId;
   }
   return globalId.split("-")[1];
-}
-
-function isolate(userId, globalId) {
-  return userId + "-" + globalId;
-}
-
-function isolateArray(userId, keys, data) {
-  for(var i = 0; i != data.length; i++) {
-    if(typeof data[i] === "object") {
-      isolateObject(userId, keys, data[i]);
-    }
-    else {
-      data[i] = isolate(userId, data[i]);
-    }
-  }
-  return data;
-}
-
-function isolateObject(userId, keys, object) {
-  for(var key in object) {
-    if(key in keys && typeof object[key] === "string") {
-      object[key] = isolate(userId, object[key]);
-    }
-    else {
-      if(object[key] instanceof Array) {
-        isolateArray(userId, keys, object[key]);
-      }
-      else if(typeof object[key] == "object") {
-        isolateObject(userId, keys, object[key]);
-      }
-    }
-  }
-  return object;
 }
 
 function unIsolateArrayOfObjects(keys, data) {
@@ -130,6 +98,10 @@ function GlobalId(options) {
   this._options = options;
 }
 
+GlobalId.prototype.createIsolator = function(userId) {
+  return new Isolator(this._options.keys, userId);
+};
+
 GlobalId.prototype.isolate = function(userId, data) {
   if(typeof userId !== "number") {
     data = userId;
@@ -139,13 +111,13 @@ GlobalId.prototype.isolate = function(userId, data) {
     throw new Error("userId is required");
   }
   if(data instanceof Array) {
-    return isolateArray(userId, this._options.keys, data);
+    return this.createIsolator(userId).array(data);
   }
   else if(typeof data === "object") {
-    return isolateObject(userId, this._options.keys, data);
+    return this.createIsolator(userId).object(data);
   }
   else {
-    return isolate(userId, data);
+    return Isolator.isolate(userId, data);
   }
 };
 
@@ -170,7 +142,7 @@ GlobalId.prototype.gen = function() {
   }
 };
 
-GlobalId.isolate = isolate;
+GlobalId.isolate = Isolator.isolate;
 GlobalId.genIsolated = genIsolated;
 GlobalId.unIsolate = unIsolate;
 GlobalId.gen = gen;

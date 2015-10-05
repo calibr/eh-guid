@@ -128,4 +128,73 @@ describe("isolate", function() {
     g.isolate(arr);
     should.deepEqual(arr, expected);
   });
+
+  it("should isolate Sequelize filter object", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var source = {
+      globalId: {
+        $in: ["guid1", "guid2"]
+      },
+      parentId: {
+        eq: "testparent"
+      }
+    };
+    var expected = {
+      globalId: {
+        $in: ["1-guid1", "1-guid2"]
+      },
+      parentId: {
+        eq: "1-testparent"
+      }
+    };
+    g.isolate(source);
+    should.deepEqual(source, expected);
+  });
+
+  it("should not isolate Sequelize filter object with not registered keys", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var source = {
+      globalIds: {
+        $in: ["guid1", "guid2"]
+      }
+    };
+    var expected = {
+      globalIds: {
+        $in: ["guid1", "guid2"]
+      }
+    };
+    g.isolate(source);
+    should.deepEqual(source, expected);
+  });
+
+  it("should isolate Sequelize filter object with mixed keys", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var source = {
+      globalId: {
+        $in: ["guid1", "guid2"]
+      },
+      anotherKey: {
+        $eq: "test"
+      }
+    };
+    var expected = {
+      globalId: {
+        $in: ["1-guid1", "1-guid2"]
+      },
+      anotherKey: {
+        $eq: "test"
+      }
+    };
+    g.isolate(source);
+    should.deepEqual(source, expected);
+  });
 });
