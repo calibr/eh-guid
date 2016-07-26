@@ -197,4 +197,37 @@ describe("isolate", function() {
     g.isolate(source);
     should.deepEqual(source, expected);
   });
+
+  it("shouldn't isolate ignored values", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var source = {
+      subObject: {
+        globalId: "default"
+      },
+      anotherObject: {
+        parentId: "root"
+      },
+      thirdObject: {
+        globalId: "isolateme"
+      }
+    };
+    var expected = {
+      subObject: {
+        globalId: "default"
+      },
+      anotherObject: {
+        parentId: "root"
+      },
+      thirdObject: {
+        globalId: "1-isolateme"
+      }
+    };
+    g.isolate(source, {
+      ignore: ["default", "root"]
+    });
+    should.deepEqual(source, expected);
+  });
 });

@@ -99,12 +99,13 @@ function GlobalId(options) {
   this._options = options;
 }
 
-GlobalId.prototype.createIsolator = function(userId) {
-  return new Isolator(this._options.keys, userId);
+GlobalId.prototype.createIsolator = function(userId, options) {
+  return new Isolator(this._options.keys, userId, options);
 };
 
-GlobalId.prototype.isolate = function(userId, data) {
+GlobalId.prototype.isolate = function(userId, data, options) {
   if(typeof userId !== "number") {
+    options = data;
     data = userId;
     userId = this._options.userId;
   }
@@ -112,10 +113,10 @@ GlobalId.prototype.isolate = function(userId, data) {
     throw new Error("userId is required");
   }
   if(data instanceof Array) {
-    return this.createIsolator(userId).array(data);
+    return this.createIsolator(userId, options).array(data);
   }
   else if(typeof data === "object") {
-    return this.createIsolator(userId).object(data);
+    return this.createIsolator(userId, options).object(data);
   }
   else {
     return Isolator.isolate(userId, data);
