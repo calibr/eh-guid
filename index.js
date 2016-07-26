@@ -17,7 +17,12 @@ function unIsolate(globalId) {
   if(typeof globalId != "string") {
     return globalId;
   }
-  if(globalId.indexOf("-") === -1) {
+  var dashIndex = globalId.indexOf("-");
+  if(dashIndex === -1) {
+    return globalId;
+  }
+  if(dashIndex !== globalId.lastIndexOf("-")) {
+    // it is not isolate global_id
     return globalId;
   }
   return globalId.split("-")[1];

@@ -105,4 +105,19 @@ describe("unisolate", function() {
     };
     obj.should.eql(expected);
   });
+
+  it("should not isolate string not formatted like isolate global_id", function() {
+    var obj = {
+      globalId: ["1-test-hello", "1-guid"]
+    };
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId"]
+    });
+    g.unIsolate(obj);
+    var expected = {
+      globalId: ['1-test-hello', 'guid']
+    };
+    obj.should.eql(expected);
+  });
 });
