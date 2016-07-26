@@ -2,7 +2,8 @@
 
 var
   randomString = require("just.randomstring"),
-  Isolator = require("./lib/isolator");
+  Isolator = require("./lib/isolator"),
+  instauuid = require("instauuid");
 
 function gen() {
   return randomString(16);
@@ -142,11 +143,17 @@ GlobalId.prototype.gen = function() {
   }
 };
 
+function testUuid() {
+  this.counter = this.counter || 0;
+  return instauuid({additional: 1, countNumber: this.counter});
+}
+
 GlobalId.isolate = Isolator.isolate;
 GlobalId.genIsolated = genIsolated;
 GlobalId.unIsolate = unIsolate;
 GlobalId.gen = gen;
 GlobalId.getUser = getUser;
 GlobalId.isIsolated = isIsolated;
+GlobalId.test = testUuid;
 
 module.exports = GlobalId;
