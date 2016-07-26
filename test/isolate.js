@@ -263,4 +263,17 @@ describe("isolate", function() {
     });
     should.deepEqual(source, expected);
   });
+
+  it("shouldn't isolate ignored values when isolate string", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var source = "40ecb209-a864-4f40-b065-35958a988d25";
+    var expected = source;
+    source = g.isolate(source, {
+      ignore: /^(default|root|trash|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$/
+    });
+    expected.should.equal(source);
+  });
 });

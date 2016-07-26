@@ -124,7 +124,7 @@ GlobalId.prototype.isolate = function(userId, data, options) {
     return this.createIsolator(userId, options).object(data);
   }
   else {
-    return Isolator.isolate(userId, data);
+    return this.createIsolator(userId, options).isolate(data, []);
   }
 };
 
