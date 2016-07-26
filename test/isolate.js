@@ -230,4 +230,37 @@ describe("isolate", function() {
     });
     should.deepEqual(source, expected);
   });
+
+  it("shouldn't isolate ignored values regexp", function() {
+    var g = new GlobalId({
+      userId: 1,
+      keys: ["globalId", "parentId"]
+    });
+    var source = {
+      subObject: {
+        globalId: "default"
+      },
+      anotherObject: {
+        parentId: "root"
+      },
+      thirdObject: {
+        globalId: "isolateme"
+      }
+    };
+    var expected = {
+      subObject: {
+        globalId: "default"
+      },
+      anotherObject: {
+        parentId: "root"
+      },
+      thirdObject: {
+        globalId: "1-isolateme"
+      }
+    };
+    g.isolate(source, {
+      ignore: /^(default|root)$/i
+    });
+    should.deepEqual(source, expected);
+  });
 });
