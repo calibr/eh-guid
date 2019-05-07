@@ -1,6 +1,6 @@
 {
   "name": "eh-guid",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "EverHelper working with guid",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,6 @@
   "author": "calibr <awcalibr@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "instauuid": "^1.0.4",
     "just.randomstring": "^0.1.1"
   },
   "devDependencies": {
