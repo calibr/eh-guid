@@ -5,9 +5,9 @@ var
   Isolator = require("./lib/isolator"),
   cryptoRandomString = require('crypto-random-string');
 
-function gen() {
+function gen(len = 16) {
   try {
-    return cryptoRandomString({ length: 16, type: 'alphanumeric' }).toLowerCase()
+    return cryptoRandomString({ length: len, type: 'alphanumeric' }).toLowerCase()
   } catch (err) {
     return randomString(16)
   }
@@ -144,12 +144,12 @@ GlobalId.prototype.unIsolate = function(data) {
   }
 };
 
-GlobalId.prototype.gen = function() {
+GlobalId.prototype.gen = function(len) {
   if(this._options.userId) {
     return genIsolated(this._options.userId);
   }
   else {
-    return gen();
+    return gen(len);
   }
 };
 

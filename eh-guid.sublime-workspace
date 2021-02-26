@@ -748,7 +748,7 @@
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -1374,9 +1374,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "ios",
+		"last_filter": "comment",
 		"selected_items":
 		[
+			[
+				"comment",
+				"~/wrk/comment-service/comment-service.sublime-project"
+			],
 			[
 				"ios",
 				"~/wrk/editor-ios/editor-ios.sublime-project"
@@ -1884,10 +1888,6 @@
 			[
 				"sync_admin",
 				"~/wrk/positive-sites/everhelper.me/_sync_admin/sync_admin.sublime-project"
-			],
-			[
-				"trial",
-				"~/wrk/trial-server/trial-server.sublime-project"
 			]
 		],
 		"width": 380.0
