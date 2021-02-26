@@ -617,6 +617,9 @@
 	],
 	"file_history":
 	[
+		"/Users/denis/wrk/modules/eh-guid/index.js",
+		"/Users/denis/wrk/modules/eh-guid/package.json",
+		"/Users/denis/wrk/modules/eh-guid/package-lock.json",
 		"/Users/denis/wrk/marker-service/package-lock.json",
 		"/Users/denis/wrk/marker-service/package.json",
 		"/Users/denis/wrk/marker-service/lib/controllers/MarkerController.ts",
@@ -741,10 +744,7 @@
 		"/Users/denis/wrk/wp-editor/desktop_edit_old.js",
 		"/Users/denis/wrk/wp-editor/.gitignore",
 		"/Users/denis/wrk/wp-editor/style.scss",
-		"/Users/denis/wrk/wp-editor/test.html",
-		"/Users/denis/wrk/wp-editor/style.css",
-		"/Users/denis/wrk/wp-editor/build/.gitignore",
-		"/Users/denis/wrk/wp-editor/.editorconfig"
+		"/Users/denis/wrk/wp-editor/test.html"
 	],
 	"find":
 	{
@@ -755,6 +755,7 @@
 		"height": 101.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -762,6 +763,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"instauuid",
+			"testUuid",
+			"instauuid"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -843,7 +847,7 @@
 	"project": "eh-guid.sublime-project",
 	"replace":
 	{
-		"height": 70.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1370,9 +1374,21 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "ios",
 		"selected_items":
 		[
+			[
+				"ios",
+				"~/wrk/editor-ios/editor-ios.sublime-project"
+			],
+			[
+				"device",
+				"~/wrk/device-service/device-service.sublime-project"
+			],
+			[
+				"marker",
+				"~/wrk/marker-service/marker-service.sublime-project"
+			],
 			[
 				"sync-ser",
 				"~/wrk/sync_server/sync-server/sync-server.sublime-project"
@@ -1428,10 +1444,6 @@
 			[
 				"migra",
 				"~/wrk/migrate-to-workspaces/migrate-to-workspaces.sublime-project"
-			],
-			[
-				"marker",
-				"~/wrk/dbs/markers-db/markers-db.sublime-project"
 			],
 			[
 				"markers-db",
@@ -1876,14 +1888,6 @@
 			[
 				"trial",
 				"~/wrk/trial-server/trial-server.sublime-project"
-			],
-			[
-				"wp-onte",
-				"~/wrk/modules/wp-notes-editor/wp-notes-editor.sublime-project"
-			],
-			[
-				"wp",
-				"~/wrk/modules/wp-notes-editor/wp-notes-editor.sublime-project"
 			]
 		],
 		"width": 380.0

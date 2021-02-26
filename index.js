@@ -2,10 +2,15 @@
 
 var
   randomString = require("just.randomstring"),
-  Isolator = require("./lib/isolator")
+  Isolator = require("./lib/isolator"),
+  cryptoRandomString = require('crypto-random-string');
 
 function gen() {
-  return randomString(16);
+  try {
+    return cryptoRandomString({ length: 16, type: 'alphanumeric' }).toLowerCase()
+  } catch (err) {
+    return randomString(16)
+  }
 }
 
 function genIsolated(userId) {
